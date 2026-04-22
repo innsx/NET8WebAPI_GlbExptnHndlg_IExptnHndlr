@@ -1,0 +1,6 @@
+@NET8WebAPI_GlbExptnHndlg_IExptnHndlr_HostAddress = http://localhost:5157
+
+GET {{NET8WebAPI_GlbExptnHndlg_IExptnHndlr_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
