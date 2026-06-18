@@ -16,9 +16,9 @@ namespace NET8WebAPI_GlbExptnHndlg_IExptnHndlr.GlobleExptnHandlers.CustomizedExc
             : base("One or more validation errors occurred.", HttpStatusCode.BadRequest)
         {
             Errors = new Dictionary<string, string[]>
-        {
-            { field, [error] }
-        };
+            {
+                { field, [error] }
+            };
         }
     }
 }

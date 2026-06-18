@@ -23,8 +23,13 @@ builder.Services.AddDbContext<TestDbContext>(options =>
 //to generate standardized RFC 7807 error responses.
 builder.Services.AddProblemDetails();
 
-//Register the Service: Use the AddExceptionHandler extension method to add your custom handler
-//to the Dependency Injection (DI) container.
+
+//This AddExceptionHandler() method registers a custom error handler in ASP.NET Core (.NET 8+).
+//The system registers this service with a Singleton lifetime.
+//Do not inject scoped dependencies directly into its constructor
+//To make builder.Services.AddExceptionHandler<GlobalExceptionHandler>(); work,
+//you must also add the exception handling middleware to the HTTP request pipeline
+//using app.UseExceptionHandler(); in your Program.cs file see below in the Middlware pipeline.
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 var app = builder.Build();

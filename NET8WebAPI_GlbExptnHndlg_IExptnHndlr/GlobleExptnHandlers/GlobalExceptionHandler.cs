@@ -14,6 +14,7 @@ namespace NET8WebAPI_GlbExptnHndlg_IExptnHndlr.GlobleExptnHandlers
         private readonly ILogger<GlobalExceptionHandler> _logger;
         private IProblemDetailsService _problemDetailsService;
 
+        //INJECTING Dependencies
         public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger, IProblemDetailsService problemDetailsService)
         {
             _logger = logger;
@@ -36,12 +37,14 @@ namespace NET8WebAPI_GlbExptnHndlg_IExptnHndlr.GlobleExptnHandlers
                 Status = statusCode,
                 Title = title,
                 Type = GetProblemType(statusCode),
-                Instance = httpContext.Request.Path,
+                //Instance = httpContext.Request.Path,
+                Instance = $"{httpContext.Request.Method} {httpContext.Request.Path}",
                 Detail = GetSafeErrorMessage(exception, httpContext)
             };
 
             problemDetails.Extensions["traceId"] = httpContext.TraceIdentifier;
             problemDetails.Extensions["timestamp"] = DateTime.UtcNow;
+            //problemDetails.Extensions["User"] = httpContext.User;
 
             //In ASP.NET Core, ProblemDetailsContext is a native configuration class
             //that encapsulates all the contextual metadata needed to generate a standardized,
